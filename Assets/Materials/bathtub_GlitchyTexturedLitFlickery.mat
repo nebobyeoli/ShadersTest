@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: GlitchyTexturedLitFlickery
+  m_Name: bathtub_GlitchyTexturedLitFlickery
   m_Shader: {fileID: -6465566751694194690, guid: bb4287f09fdea98429934f4c12add3a0, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -25,7 +25,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 69a759d8cf5fee74bba70583f08dc859, type: 3}
+        m_Texture: {fileID: 2800000, guid: 674ee33a1078508488507ff9896f0224, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -57,7 +57,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 0c7403caba54e984ca3c2a96f28cd506, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _NormalMap:
@@ -144,7 +144,7 @@ Material:
     - _EmissiveBoost: 8
     - _EnvironmentReflections: 1
     - _FlickerFragmentAmount: 4
-    - _FlickerSize: 0.001
+    - _FlickerSize: 0.002
     - _GlitchDisplacementStrength: 0.75
     - _GlitchOpacity: 1
     - _GlitchesSpawnSpeed: 3
@@ -180,7 +180,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _BaseColorTint: {r: 1, g: 0.09523807, b: 0.09523807, a: 0.5058824}
+    - _BaseColorTint: {r: 1, g: 0.09523804, b: 0.09523804, a: 0.4745098}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _EmissiveColor: {r: 6.792453, g: 0.4165185, b: 0.4165185, a: 1}
