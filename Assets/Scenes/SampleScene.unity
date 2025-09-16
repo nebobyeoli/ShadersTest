@@ -507,7 +507,7 @@ GameObject:
   - component: {fileID: 696458263}
   - component: {fileID: 696458262}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Water
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -559,7 +559,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: fb16abc5e23535c44a0750cc48546237, type: 2}
+  - {fileID: 2100000, guid: 6d0449c2f83f75947a78bcbe574fbad9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -968,7 +968,7 @@ GameObject:
   - component: {fileID: 2073873190}
   - component: {fileID: 2073873189}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: WaterFloor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1021,7 +1021,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 687b5d2c4a034674d97ac7426f493cb7, type: 2}
+  - {fileID: 2100000, guid: d0919d12b8cded7498dc00d0c53676f9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
