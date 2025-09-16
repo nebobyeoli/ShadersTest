@@ -2,11 +2,23 @@
 
 shaders test on web
 
-
 ### project version
 `Unity 6000.2.3f1 LTS`
 
-*version `2022.3.62f1 LTS` (latest 2022.3 LTS available) is way smoother!!!! 😭&
+
+## [Patch-Notes game jam submission](https://tablefortwenty.itch.io/buggy-ducky)
+*Buggy Ducky*, made by team *TableForTwenty*
+
+## [Github Pages of ShadersTest](https://nebobyeoli.github.io/ShadersTest-webbuild/)
+
+<details>
+<summary>Preview image</summary>
+
+![screenshot.png](screenshot.png)
+
+</details>
+
+<br>
 
 ## Shader graph testing shenanigans
 
