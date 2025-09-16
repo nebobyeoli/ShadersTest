@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: d9d0b5ac4b8c3b74c819170aac104ba3, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -177,7 +177,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 98129cbd42757bb4581fe6ee8c944fc0, type: 2}
     - target: {fileID: 919132149155446097, guid: 9bd9427fdb82ee84f86b0617385a305c, type: 3}
       propertyPath: m_Name
-      value: Bathtub
+      value: bathtub Flickery
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1215,10 +1215,10 @@ SceneRoots:
   - {fileID: 899787664}
   - {fileID: 2049177159}
   - {fileID: 443597348}
+  - {fileID: 263668416}
   - {fileID: 1476798374}
   - {fileID: 909820001}
   - {fileID: 885422862}
   - {fileID: 696458265}
   - {fileID: 2073873192}
   - {fileID: 832575519}
-  - {fileID: 263668416}
