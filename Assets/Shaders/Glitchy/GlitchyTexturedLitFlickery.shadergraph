@@ -2873,8 +2873,8 @@
     "m_ObjectId": "59ddfa0774424a3eb028702830aa62f2",
     "m_Title": "FlickeryVertexPosition",
     "m_Position": {
-        "x": 3666.999755859375,
-        "y": -2331.999755859375
+        "x": 3667.0,
+        "y": -2332.0
     }
 }
 
@@ -3132,8 +3132,8 @@
     "m_ObjectId": "6e75b0dc26754300880034cc0b18e494",
     "m_Title": "FragmentColor",
     "m_Position": {
-        "x": 4125.00048828125,
-        "y": -1587.0001220703125
+        "x": 4125.0,
+        "y": -1587.0
     }
 }
 
@@ -3200,6 +3200,9 @@
         },
         {
             "m_Id": "85c1bc31dbaf40c3991f480bb7f207b2"
+        },
+        {
+            "m_Id": "d4b3d5bc0c5849b5b09865d89b1d45d5"
         }
     ],
     "synonyms": [],
@@ -5281,6 +5284,21 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "d4b3d5bc0c5849b5b09865d89b1d45d5",
+    "m_Id": 3,
+    "m_DisplayName": "EmAlpha",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "EmAlpha",
+    "m_StageCapability": 2,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
     "m_ObjectId": "d8bc1e9746114a90a02b53cb5c3ff1d1",
     "m_Id": -112598179,
@@ -5482,7 +5500,7 @@
     "m_Group": {
         "m_Id": ""
     },
-    "m_Name": "Glitchy_OverlayColorByAlpha",
+    "m_Name": "Glitchy_OverlayColorLerp",
     "m_DrawState": {
         "m_Expanded": true,
         "m_Position": {

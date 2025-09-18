@@ -2523,7 +2523,7 @@
     "m_ObjectId": "4acf013bbad04aa39fab6f34e5198445",
     "m_Title": "ScreenUV",
     "m_Position": {
-        "x": 3657.999755859375,
+        "x": 3658.0,
         "y": -2655.0
     }
 }
@@ -2604,7 +2604,7 @@
     "m_ObjectId": "52c3cf4823004c92999d3b99e1cb5146",
     "m_Title": "DistortionNormal",
     "m_Position": {
-        "x": 737.9998779296875,
+        "x": 738.0,
         "y": -2583.0
     }
 }
@@ -5756,7 +5756,7 @@
     "m_ObjectId": "db147cfd585442b8861e01ebd57da412",
     "m_Title": "vertex position - it makes the entire thing boogie too much",
     "m_Position": {
-        "x": 4801.99951171875,
+        "x": 4802.0,
         "y": -3150.0
     }
 }

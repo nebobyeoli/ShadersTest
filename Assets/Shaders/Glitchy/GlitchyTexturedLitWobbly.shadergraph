@@ -2618,6 +2618,21 @@
 {
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "4c5332f817b84581aebf10d23f1faa5c",
+    "m_Id": 3,
+    "m_DisplayName": "EmAlpha",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "EmAlpha",
+    "m_StageCapability": 2,
+    "m_Value": 0.0,
+    "m_DefaultValue": 0.0,
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "51c3763ab81946b1b7b8b1da1967f22c",
     "m_Id": 7,
     "m_DisplayName": "A",
@@ -3140,7 +3155,7 @@
     "m_Title": "FragmentColor",
     "m_Position": {
         "x": 4115.0,
-        "y": -1586.9998779296875
+        "y": -1587.0
     }
 }
 
@@ -3301,6 +3316,9 @@
         },
         {
             "m_Id": "85c1bc31dbaf40c3991f480bb7f207b2"
+        },
+        {
+            "m_Id": "4c5332f817b84581aebf10d23f1faa5c"
         }
     ],
     "synonyms": [],
@@ -6254,8 +6272,8 @@
     "m_ObjectId": "fca1ea4763104f8b971259133e171d65",
     "m_Title": "WobblyVertexPosition",
     "m_Position": {
-        "x": 4052.999755859375,
-        "y": -2337.999755859375
+        "x": 4053.0,
+        "y": -2338.0
     }
 }
 

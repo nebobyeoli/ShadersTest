@@ -4405,7 +4405,7 @@
     "m_ObjectId": "4acf013bbad04aa39fab6f34e5198445",
     "m_Title": "ScreenUV",
     "m_Position": {
-        "x": 3365.999755859375,
+        "x": 3366.0,
         "y": -2604.0
     }
 }
@@ -4565,8 +4565,8 @@
     "m_ObjectId": "52c3cf4823004c92999d3b99e1cb5146",
     "m_Title": "DistortionNormal",
     "m_Position": {
-        "x": 954.9999389648438,
-        "y": -2589.999755859375
+        "x": 955.0,
+        "y": -2590.0
     }
 }
 
@@ -5089,8 +5089,8 @@
     "m_ObjectId": "639ec5f012d14d8a98f0ffcc1c4056ab",
     "m_Title": "GetAlphaPositions",
     "m_Position": {
-        "x": 5991.99951171875,
-        "y": -1198.9998779296875
+        "x": 5992.0,
+        "y": -1199.0
     }
 }
 
@@ -5487,8 +5487,8 @@
     "m_ObjectId": "6e75b0dc26754300880034cc0b18e494",
     "m_Title": "FragmentColor",
     "m_Position": {
-        "x": 4467.99951171875,
-        "y": -1446.9998779296875
+        "x": 4468.0,
+        "y": -1447.0
     }
 }
 
@@ -7834,8 +7834,8 @@
     "m_ObjectId": "abacd47f56f24d9d85b5dc179c7fd92b",
     "m_Title": "VertexOffset",
     "m_Position": {
-        "x": 2966.999755859375,
-        "y": -1546.9998779296875
+        "x": 2967.0,
+        "y": -1547.0
     }
 }
 
