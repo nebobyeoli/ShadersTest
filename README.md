@@ -20,6 +20,15 @@ shaders test on web
 
 <br>
 
+## References
+
+- [[Youtube] Glitch Shader using Unity HDRP](https://www.youtube.com/watch?v=7L9yxVwEFsA) (video uses Amplify shader graph editor, so the one in this project is manually made with Unity default shader graph editor)
+
+- [[Reddit] Grid Skybox Shader](https://www.reddit.com/r/Unity3D/comments/m06t1i/skybox_fun_with_shader_graph/)<br>
+[[Youtube] Skybox Shader using Unity URP](https://www.youtube.com/watch?v=sXevaQ8cM2c)
+
+- [[Youtube] CRT Shader using Unity URP Fullscreen](https://www.youtube.com/watch?v=lOyb0_rFA1A) (not implemented in project)
+
 ## Shader graph testing shenanigans
 
 ### URP Lit transparent specular type
