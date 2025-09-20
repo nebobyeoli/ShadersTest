@@ -23,15 +23,15 @@ Shader "Custom/Outline"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			
             // // The Blit.hlsl file provides the vertex shader (Vert),
-            // // the input structure (Attributes) and the output structure (Varyings)
+            // // the input structure (Attributes1) and the output structure (Varyings1)
             #include "Packages/com.unity.render-pipelines.core/Runtime/Utilities/Blit.hlsl"
 
-            #pragma vertex vert
+            #pragma vertex vert1 // vert1 is the problem//what is pragma vertex
             #pragma fragment frag
 			
-			// TEXTURE2D_SAMPLER2D(_MainTex/*_BaseMap*/, sampler_MainTex/*sampler_BaseMap*/);
-            TEXTURE2D(_MainTex);
-            SAMPLER(sampler_MainTex);
+			// TEXTURE2D_SAMPLER2D(_CameraOpaqueTexture/*_BaseMap*/, sampler_CameraOpaqueTexture/*sampler_BaseMap*/);
+            TEXTURE2D(_CameraOpaqueTexture);
+            SAMPLER(sampler_CameraOpaqueTexture);
 			// _CameraNormalsTexture contains the view space normals transformed
 			// to be in the 0...1 range.
             TEXTURE2D(_CameraNormalsTexture);
@@ -40,13 +40,13 @@ Shader "Custom/Outline"
             SAMPLER(sampler_CameraDepthTexture);
 
             // CBUFFER_START(UnityPerMaterial)
-            //     half4 _BaseColor;
-            //     float4 _BaseMap_ST;
+            //     // half4 _BaseColor;
+            //     float4 _CameraOpaqueTexture_ST;//_BaseMap_ST
             // CBUFFER_END
 			
-			// Data pertaining to _MainTex's dimensions.
+			// Data pertaining to _CameraOpaqueTexture's dimensions.
 			// https://docs.unity3d.com/Manual/SL-PropertiesInPrograms.html
-			float4 _MainTex_TexelSize;
+			float4 _CameraOpaqueTexture_TexelSize;
 
 			float _Scale;
 			half4 _Color;
@@ -88,52 +88,93 @@ Shader "Custom/Outline"
 				return float4(color, alpha);
 			}
 			
-            // struct Attributes
-            // {
-            //     float4 positionOS : POSITION;
-            //     float2 uv : TEXCOORD0;
-            // };
-
-            struct Varyings
+			struct Attributes0
+			{
+				uint vertexID : SV_VertexID;
+			};
+            struct Attributes1
             {
-                float4 positionHCS : SV_POSITION;
+				uint vertexID : SV_VertexID; //// <<??
+                float4 positionOS : POSITION;
+                float2 uv : TEXCOORD0;
+            };
+			
+            struct Varyings0
+            {
+                float4 vertex : SV_POSITION;
+                float2 uv   : TEXCOORD0;
+            };
+            struct Varyings1
+            {
+                float4 vertex : SV_POSITION;
                 float2 uv : TEXCOORD0;
 				float2 texcoordStereo : TEXCOORD1;
 				float3 viewSpaceDir : TEXCOORD2;
-			#if STEREO_INSTANCING_ENABLED
-				uint stereoTargetEyeIndex : SV_RenderTargetArrayIndex;
-			#endif
+			// #if STEREO_INSTANCING_ENABLED
+			// 	uint stereoTargetEyeIndex : SV_RenderTargetArrayIndex;
+			// #endif
             };
 
-			Varyings vert(Attributes IN)
+			/*******************************************************/
+			Varyings0 vert0(Attributes0 IN) // this is from blit.hlsl, this works
 			{
-                // Varyings OUT;
-                // OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz);
-                // OUT.uv = TRANSFORM_TEX(IN.uv, _BaseMap);
-                // return OUT;
-				Varyings OUT;
-				OUT.positionHCS = float4(IN.positionOS.xy, 0.0, 1.0);
-				OUT.viewSpaceDir = mul(_ClipToView, OUT.positionHCS).xyz;
-				OUT.uv = TransformTriangleVertexToUV(IN.positionOS.xy);
+				Varyings0 OUT;
 
-			#if UNITY_UV_STARTS_AT_TOP
-				OUT.uv = OUT.uv * float2(1.0, -1.0) + float2(0.0, 1.0);
-			#endif
+				OUT.vertex = GetFullScreenTriangleVertexPosition(IN.vertexID);
+				OUT.uv   = GetFullScreenTriangleTexCoord(IN.vertexID);
+
+				return OUT;
+			}
+			// Varyings Vert(Attributes0 IN)
+			// {
+            //  Varyings1 OUT;
+            //  OUT.vertex = TransformObjectToHClip(IN.positionOS.xyz);
+            //  OUT.uv = TRANSFORM_TEX(IN.uv, _BaseMap);
+            //  return OUT;
+			// }
+			Varyings1 vert1(Attributes1 IN)
+			{
+				Varyings1 OUT;
+				// OUT.vertex = float4(IN.positionOS.xy, 0.0, 1.0);
+				OUT.vertex = GetFullScreenTriangleVertexPosition(IN.vertexID);
+				OUT.uv   = DYNAMIC_SCALING_APPLY_SCALEBIAS(GetFullScreenTriangleTexCoord(IN.vertexID));//IN.positionOS.xy //??
+				OUT.viewSpaceDir = mul(_ClipToView, OUT.vertex).xyz;
+				// OUT.uv = TransformTriangleVertexToUV(IN.positionOS.xy);
+				// OUT.uv = DYNAMIC_SCALING_APPLY_SCALEBIAS(TransformTriangleVertexToUV(IN.positionOS.xy));
+
+			// #if UNITY_UV_STARTS_AT_TOP
+			// 	OUT.uv = OUT.uv * float2(1.0, -1.0) + float2(0.0, 1.0);
+			// #endif
 
 				OUT.texcoordStereo = TransformStereoScreenSpaceTex(OUT.uv, 1.0);
 
 				return OUT;
 			}
-			/*
-            half4 frag(Varyings IN) : SV_Target
+			/*******************************************************/
+
+
+			
+			
+            half4 frag0 (Varyings input) : SV_Target
+            {
+                // UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
+
+                // Sample the color from the input texture
+                float4 color = SAMPLE_TEXTURE2D(_CameraOpaqueTexture, sampler_CameraOpaqueTexture, input.texcoord);
+
+                // Output the color from the texture, with the green value set to the chosen intensity
+                return color * float4(0, 1.5, 0, 1);
+            }
+
+            half4 frag(Varyings1 IN) : SV_Target
             {
                 float halfScaleFloor = floor(_Scale * 0.5);
 				float halfScaleCeil = ceil(_Scale * 0.5);
 
-				float2 bottomLeftUV = IN.uv - float2(_MainTex_TexelSize.x, _MainTex_TexelSize.y) * halfScaleFloor;
-				float2 topRightUV = IN.uv + float2(_MainTex_TexelSize.x, _MainTex_TexelSize.y) * halfScaleCeil;  
-				float2 bottomRightUV = IN.uv + float2(_MainTex_TexelSize.x * halfScaleCeil, -_MainTex_TexelSize.y * halfScaleFloor);
-				float2 topLeftUV = IN.uv + float2(-_MainTex_TexelSize.x * halfScaleFloor, _MainTex_TexelSize.y * halfScaleCeil);
+				float2 bottomLeftUV = IN.uv - float2(_CameraOpaqueTexture_TexelSize.x, _CameraOpaqueTexture_TexelSize.y) * halfScaleFloor;
+				float2 topRightUV = IN.uv + float2(_CameraOpaqueTexture_TexelSize.x, _CameraOpaqueTexture_TexelSize.y) * halfScaleCeil;  
+				float2 bottomRightUV = IN.uv + float2(_CameraOpaqueTexture_TexelSize.x * halfScaleCeil, -_CameraOpaqueTexture_TexelSize.y * halfScaleFloor);
+				float2 topLeftUV = IN.uv + float2(-_CameraOpaqueTexture_TexelSize.x * halfScaleFloor, _CameraOpaqueTexture_TexelSize.y * halfScaleCeil);
 
 				// sampling the depths
 				float depth0 = SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, sampler_CameraDepthTexture, bottomLeftUV).r;
@@ -187,21 +228,10 @@ Shader "Custom/Outline"
 
 				half4 edgeColor = half4(_Color.rgb, _Color.a * edge);
 
-				half4 color = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, IN.uv);
-				// float4 color = SAMPLE_TEXTURE2D_X(_MainTex, sampler_MainTex, IN.uv);
+				half4 color = SAMPLE_TEXTURE2D(_CameraOpaqueTexture, sampler_CameraOpaqueTexture, IN.uv);
+				// float4 color = SAMPLE_TEXTURE2D_X(_CameraOpaqueTexture, sampler_CameraOpaqueTexture, IN.uv);
 				
 				return alphaBlend(edgeColor, color);
-            }
-			*/
-            half4 frag (Varyings input) : SV_Target
-            {
-                UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
-
-                // Sample the color from the input texture
-                float4 color = SAMPLE_TEXTURE2D_X(_MainTex, sampler_MainTex, input.uv);
-
-                // Output the color from the texture, with the green value set to the chosen intensity
-                return color * float4(0, 1.5, 0, 1);
             }
             ENDHLSL
         }
