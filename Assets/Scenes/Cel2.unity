@@ -371,8 +371,8 @@ GameObject:
   - component: {fileID: 415194253}
   - component: {fileID: 415194256}
   m_Layer: 7
-  m_Name: Main Camera
-  m_TagString: MainCamera
+  m_Name: Output Camera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1387,7 +1387,7 @@ GameObject:
   - component: {fileID: 1926898690}
   m_Layer: 0
   m_Name: default Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
