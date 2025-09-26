@@ -1,4 +1,4 @@
-Shader "Custom/Outline"
+Shader "Custom/Outline_alphaBlend"
 {
     // Properties
     // {
@@ -232,8 +232,7 @@ Shader "Custom/Outline"
 				half4 color = SAMPLE_TEXTURE2D(_CameraOpaqueTexture, sampler_CameraOpaqueTexture, IN.uv);
 				// float4 color = SAMPLE_TEXTURE2D_X(_CameraOpaqueTexture, sampler_CameraOpaqueTexture, IN.uv);
 				
-				// return alphaBlend(edgeColor, color);
-				return edgeColor;
+				return alphaBlend(edgeColor, color);
             }
             ENDHLSL
         }

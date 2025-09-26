@@ -28,7 +28,7 @@ MonoBehaviour:
   m_Name: OutlineRendererFeature
   m_EditorClassIdentifier: Assembly-CSharp::OutlineRendererFeature
   m_Active: 1
-  m_Shader: {fileID: 4800000, guid: b7061505bb7873a4c8e5ed51840d86c3, type: 3}
+  m_Shader: {fileID: 4800000, guid: d916f4fa57a9180488d2e4f12b29faab, type: 3}
   m_Scale: 3
   m_DepthThreshold: 2.85
   m_NormalThreshold: 0.4
@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: de640fe3d0db1804a85f9fc8f5cadab6, type: 3}
-  m_Name: PC_Outline_Renderer
+  m_Name: PC_Outline_Alphablend_Renderer
   m_EditorClassIdentifier: 
   debugShaders:
     debugReplacementPS: {fileID: 4800000, guid: cf852408f2e174538bcd9b7fda1c5ae7, type: 3}
