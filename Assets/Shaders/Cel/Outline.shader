@@ -10,8 +10,8 @@ Shader "Custom/Outline"
     {
         Tags { "RenderType" = "Opaque" "RenderPipeline" = "UniversalPipeline" }
 		LOD 100
-		ZWrite Off Cull Off
-        // Cull Off ZWrite Off ZTest Always
+		// ZWrite Off Cull Off
+        Cull Off ZWrite Off ZTest Always
 
 		// guide(legacy): https://roystan.net/articles/outline-shader/
 		// source:        https://github.com/IronWarrior/UnityOutlineShader/
@@ -23,13 +23,14 @@ Shader "Custom/Outline"
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 			
             // // The Blit.hlsl file provides the vertex shader (Vert),
-            // // the input structure (Attributes1) and the output structure (Varyings1)
+            // // the input structure (Attributes0) and the output structure (Varyings0)
             #include "Packages/com.unity.render-pipelines.core/Runtime/Utilities/Blit.hlsl"
 
             #pragma vertex vert1 // vert1 is the problem//what is pragma vertex
-            #pragma fragment frag
+            #pragma fragment frag1
 			
 			// TEXTURE2D_SAMPLER2D(_CameraOpaqueTexture/*_BaseMap*/, sampler_CameraOpaqueTexture/*sampler_BaseMap*/);
+			// Camera Opaque Texture URP: https://docs.unity3d.com/Packages/com.unity.render-pipelines.universal@7.1/manual/universalrp-asset.html
             TEXTURE2D(_CameraOpaqueTexture);
             SAMPLER(sampler_CameraOpaqueTexture);
 			// _CameraNormalsTexture contains the view space normals transformed
@@ -137,8 +138,8 @@ Shader "Custom/Outline"
 				Varyings1 OUT;
 				// OUT.vertex = float4(IN.positionOS.xy, 0.0, 1.0);
 				OUT.vertex = GetFullScreenTriangleVertexPosition(IN.vertexID);
-				OUT.uv   = DYNAMIC_SCALING_APPLY_SCALEBIAS(GetFullScreenTriangleTexCoord(IN.vertexID));//IN.positionOS.xy //??
 				OUT.viewSpaceDir = mul(_ClipToView, OUT.vertex).xyz;
+				OUT.uv   = DYNAMIC_SCALING_APPLY_SCALEBIAS(GetFullScreenTriangleTexCoord(IN.vertexID));//IN.positionOS.xy //??
 				// OUT.uv = TransformTriangleVertexToUV(IN.positionOS.xy);
 				// OUT.uv = DYNAMIC_SCALING_APPLY_SCALEBIAS(TransformTriangleVertexToUV(IN.positionOS.xy));
 
@@ -154,7 +155,7 @@ Shader "Custom/Outline"
 
 
 			
-			
+			// given shader template from ColorBlit shader using URP
             half4 frag0 (Varyings input) : SV_Target
             {
                 // UNITY_SETUP_STEREO_EYE_INDEX_POST_VERTEX(input);
@@ -166,7 +167,7 @@ Shader "Custom/Outline"
                 return color * float4(0, 1.5, 0, 1);
             }
 
-            half4 frag(Varyings1 IN) : SV_Target
+            half4 frag1(Varyings1 IN) : SV_Target
             {
                 float halfScaleFloor = floor(_Scale * 0.5);
 				float halfScaleCeil = ceil(_Scale * 0.5);
