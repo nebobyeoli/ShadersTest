@@ -3,7 +3,7 @@
 shaders test on web
 
 ### project version
-`Unity 6000.2.3f1 LTS`
+`Unity 6000.2.6f2`
 
 ## [Github Pages of ShadersTest](https://nebobyeoli.github.io/ShadersTest-webbuild/)
 
@@ -64,6 +64,12 @@ created outline shader for additional visual style
   apply the render texture into a urp unlit material, set mode to `transparent` for the outline material, apply materials to quad objects and make the orthographic output camera render them.
 
   This method including the last part may seem unnecessarily complicated but it was the most convenient and familiar method I could think of at the moment
+
+- Of course, you would need to assign the objects to the layer, and make sure the layer is added on `Main Camera` (in hierarchy)'s `Rendering > Culling Mask` layers if you're using a new layer, or else you will end up with a "transparent" object with only the outline running around
+
+- (need to check) if I remember correctly, to exclude a layer from the outline rendering (while including the layer to the correct depth calculation), you need to:
+  - have the layer added on your `Outline Camera`'s Culling Mask
+  - have the layer excluded on your current `Outline Renderer.asset`("PC_Outline_Renderer.asset" or "PC_Outline_Alphablend_Renderer.asset" for this project)'s Layer Mask
 
 </details>
 
