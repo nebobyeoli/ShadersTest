@@ -30,11 +30,11 @@ MonoBehaviour:
   m_Active: 1
   m_Shader: {fileID: 4800000, guid: d916f4fa57a9180488d2e4f12b29faab, type: 3}
   m_Scale: 3
+  m_Color: {r: 0, g: 0.033986945, b: 0.101960786, a: 1}
   m_DepthThreshold: 2.85
-  m_NormalThreshold: 0.4
   m_DepthNormalThreshold: 0.6
   m_DepthNormalThresholdScale: 7
-  m_Color: {r: 0, g: 0.033986945, b: 0.101960786, a: 1}
+  m_NormalThreshold: 0.4
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
