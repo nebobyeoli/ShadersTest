@@ -1,8 +1,16 @@
 #ifndef ADDITIONAL_LIGHT_INCLUDED
 #define ADDITIONAL_LIGHT_INCLUDED
 
+// see: Outline_alphaBlend.shader
+
+/* _CameraOpaqueTexture_TexelSize
+ * : defined as global Vector4 in FullBlitOutline.shadergraph
+ *
+ * _Scale, _Color, _DepthThreshold, _DepthNormalThreshold, _DepthNormalThresholdScale, _NormalThreshold
+ * : defined as usable property reference in FullBlitOutline.shadergraph
+ */
+
 // https://discussions.unity.com/t/scene-depth-texture-texel-size-in-shadergraph-urp/1561917/3
-// _CameraOpaqueTexture_TexelSize defined as global Vector4 in FullBlitOutline.shadergraph
 void CameraOpaqueTextureTexelSize_float(
 	out float Width, out float Height, out float OneOverWidth, out float OneOverHeight)
 {
@@ -33,34 +41,26 @@ void TransformStereoScreenSpaceTex_float(float2 uv, float w,
 // Combines the top and bottom colors using normal blending.
 // https://en.wikipedia.org/wiki/Blend_modes#Normal_blend_mode
 // This performs the same operation as Blend SrcAlpha OneMinusSrcAlpha.
-void AlphaBlend_float(float4 top, float4 bottom,
-	out float4 OutColor)
+void AlphaBlend_half(half4 top, half4 bottom,
+	out half4 OutColor)
 {
-	float3 color = (top.rgb * top.a) + (bottom.rgb * (1 - top.a));
-	float alpha = top.a + bottom.a * (1 - top.a);
+	half3 color = (top.rgb * top.a) + (bottom.rgb * (1 - top.a));
+	half alpha = top.a + bottom.a * (1 - top.a);
 
-	OutColor = float4(color, alpha);
+	OutColor = half4(color, alpha);
 }
 
+//float3 SampleSceneNormals(float2 uv)
+//{
+//    return UnpackNormal(SAMPLE_TEXTURE2D(_CameraNormalsTexture, sampler_CameraNormalsTexture, uv));
+//}
 
 // in.UV (or in.texcoord) of Varyings = UV node in shadergraph = TEXCOORD0 in shader code
 void GetCornerUVs_float(float2 TEXCOORD0, float4 CameraOpaqueTexture_TexelSize, float Scale,
 	out float2 bottomLeftUV, out float2 topRightUV, out float2 bottomRightUV, out float2 topLeftUV)
 {
-	//TEXTURE2D(_CameraOpaqueTexture);
-	//SAMPLER(sampler_CameraOpaqueTexture);
-	////SamplerState sampler_CameraOpaqueTexture;
- //   TEXTURE2D(_CameraNormalsTexture);
-	//SAMPLER(sampler_CameraNormalsTexture);
-	////SamplerState sampler_CameraNormalsTexture;
- //   TEXTURE2D(_CameraDepthTexture);
-	//SAMPLER(sampler_CameraDepthTexture);
-	////SamplerState sampler_CameraDepthTexture;
-	
-    //float halfScaleFloor = floor(Scale * 0.5); // 0
-    //float halfScaleCeil = ceil(Scale * 0.5); // 1
-    float halfScaleFloor = 0;
-    float halfScaleCeil = 1;
+    float halfScaleFloor = floor(Scale * 0.5); // 0
+    float halfScaleCeil = ceil(Scale * 0.5); // 1
 
     bottomLeftUV = TEXCOORD0 - float2(CameraOpaqueTexture_TexelSize.x, CameraOpaqueTexture_TexelSize.y) * halfScaleFloor;					// BtmLeft = TEXCOORD0 + (0, 0)
     topRightUV = TEXCOORD0 + float2(CameraOpaqueTexture_TexelSize.x, CameraOpaqueTexture_TexelSize.y) * halfScaleCeil;						// TopRght = TEXCOORD0 + (texelSize.x, texelSize.y)
@@ -71,14 +71,19 @@ void GetCornerUVs_float(float2 TEXCOORD0, float4 CameraOpaqueTexture_TexelSize, 
 void NormalsSampler_float(
 	float2 bottomLeftUV, float2 topRightUV, float2 bottomRightUV, float2 topLeftUV,
 	float depth0, float depth1, float depth2, float depth3,
-	float3 viewSpaceDir, float2 TEXCOORD0,
+	float3 viewSpaceDir,
+	half4 camBufferColor,
 	
 	out float3 normal0, out float3 normal1, out float3 normal2, out float3 normal3,
 	out float3 viewNormal, out float NdotV,
 	out float edgeDepth, out float edgeNormal,
 	
-	out float edge, out half4 edgeColor, out half4 OutColor)
+	out float edge, out half4 OutColor)
 {
+	//normal0 = SampleSceneNormals(bottomLeftUV); // same result with same "redeclaration error of unity given"
+	//normal1 = SampleSceneNormals(topRightUV);
+	//normal2 = SampleSceneNormals(bottomRightUV);
+    //normal3 = SampleSceneNormals(topLeftUV);
     normal0 = SAMPLE_TEXTURE2D(_CameraNormalsTexture, sampler_CameraNormalsTexture, bottomLeftUV).rgb;
     normal1 = SAMPLE_TEXTURE2D(_CameraNormalsTexture, sampler_CameraNormalsTexture, topRightUV).rgb;
     normal2 = SAMPLE_TEXTURE2D(_CameraNormalsTexture, sampler_CameraNormalsTexture, bottomRightUV).rgb;
@@ -103,10 +108,10 @@ void NormalsSampler_float(
 	edgeNormal = edgeNormal > _NormalThreshold ? 1 : 0;
 	
     edge = max(edgeDepth, edgeNormal); 
-	edgeColor = half4(_Color.rgb, _Color.a * edge);
+	half4 edgeColor = half4(_Color.rgb, _Color.a * edge);
 
-    half4 color = SAMPLE_TEXTURE2D(_CameraOpaqueTexture, sampler_CameraOpaqueTexture, TEXCOORD0);
-    AlphaBlend_float(edgeColor, color, OutColor);
+    //half4 camBufferColor = SAMPLE_TEXTURE2D(_CameraOpaqueTexture, sampler_CameraOpaqueTexture, TEXCOORD0);
+    AlphaBlend_half(edgeColor, camBufferColor, OutColor);
 }
 
 //// in.UV (or in.texcoord) of Varyings = UV node in shadergraph = TEXCOORD0 in shader code
