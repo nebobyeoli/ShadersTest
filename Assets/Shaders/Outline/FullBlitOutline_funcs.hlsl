@@ -32,6 +32,14 @@ void AlphaBlend_half(half4 top, half4 bottom,
 	OutColor = half4(color, alpha);
 }
 
+void ReScaleForTexel_float(
+	float2 refResolution,
+	float Scale, float screenWidth, float screenHeight,
+	out float OutScale)
+{
+    OutScale = Scale * (screenHeight / refResolution.y);
+}
+
 // in.UV (or in.texcoord) of Varyings = UV node in shadergraph = TEXCOORD0 in shader code
 void GetCornerUVs_float(
 	float2 TEXCOORD0, float4 CameraOpaqueTexture_TexelSize, float Scale,
