@@ -11,14 +11,13 @@ internal class OutlinePass : ScriptableRenderPass
     //float m_Intensity;
     // add parameters for Outline.shader
     int m_Scale = 1;
+    Color m_Color = Color.white;
+
     float m_DepthThreshold = 0.2f;
-
-    float m_NormalThreshold = 0.4f;
-
     float m_DepthNormalThreshold = 0.5f;
     float m_DepthNormalThresholdScale = 7;
 
-    Color m_Color = Color.white;
+    float m_NormalThreshold = 0.4f;
 
 
     public OutlinePass(Material material)
@@ -29,18 +28,19 @@ internal class OutlinePass : ScriptableRenderPass
 
     //public void SetTarget(RTHandle colorHandle, float intensity)
     public void SetTarget(RTHandle colorHandle,
-        int scale, float depthThreshold, float normalThreshold,
-        float depthNormalThreshold, float depthNormalThresholdScale,
-        Color color)
+        int scale, Color color,
+        float depthThreshold, float depthNormalThreshold, float depthNormalThresholdScale,
+        float normalThreshold
+        )
     {
         m_CameraColorTarget = colorHandle;
         //m_Intensity = intensity;
         m_Scale = scale;
+        m_Color = color;
         m_DepthThreshold = depthThreshold;
-        m_NormalThreshold = normalThreshold;
         m_DepthNormalThreshold = depthNormalThreshold;
         m_DepthNormalThresholdScale = depthNormalThresholdScale;
-        m_Color = color;
+        m_NormalThreshold = normalThreshold;
     }
 
     [System.Obsolete]

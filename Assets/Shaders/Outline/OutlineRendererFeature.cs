@@ -9,16 +9,16 @@ internal class OutlineRendererFeature : ScriptableRendererFeature
     //public float m_Intensity;
     // add parameters for Outline.shader
     public int m_Scale = 1;
-    public float m_DepthThreshold = 0.2f;
+    public Color m_Color = Color.white;
 
-    [Range(0, 1)]
-    public float m_NormalThreshold = 0.4f;
+    public float m_DepthThreshold = 0.2f;
 
     [Range(0, 1)]
     public float m_DepthNormalThreshold = 0.5f;
     public float m_DepthNormalThresholdScale = 7;
-    
-    public Color m_Color = Color.white;
+
+    [Range(0, 1)]
+    public float m_NormalThreshold = 0.4f;
 
 
     Material m_Material;
@@ -43,9 +43,10 @@ internal class OutlineRendererFeature : ScriptableRendererFeature
             m_RenderPass.ConfigureInput(ScriptableRenderPassInput.Color);
             //m_RenderPass.SetTarget(renderer.cameraColorTargetHandle, m_Intensity);
             m_RenderPass.SetTarget(renderer.cameraColorTargetHandle,
-                m_Scale, m_DepthThreshold, m_NormalThreshold,
-                m_DepthNormalThreshold, m_DepthNormalThresholdScale,
-                m_Color);
+                m_Scale, m_Color,
+                m_DepthThreshold, m_DepthNormalThreshold, m_DepthNormalThresholdScale,
+                m_NormalThreshold
+                );
         }
     }
 
