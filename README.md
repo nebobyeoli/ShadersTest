@@ -2,7 +2,7 @@
 
 shaders test on web
 
-### project version
+### Using Unity version
 `Unity 6000.2.6f2`
 
 ## [Github Pages of ShadersTest](https://nebobyeoli.github.io/ShadersTest-webbuild/)
@@ -20,7 +20,7 @@ repo for web build output: [ShadersTest-webbuild](https://github.com/nebobyeoli/
 
 ## Projects these shaders were created for:
 
-### [*Buggy Ducky* (Patch-Notes game jam submission)](https://tablefortwenty.itch.io/buggy-ducky)
+### [*Buggy Ducky* (Patch-Notes game jam submission on itch.io)](https://tablefortwenty.itch.io/buggy-ducky)
 created shaders from team *TableForTwenty*
 
 <details>
@@ -40,7 +40,7 @@ created shaders from team *TableForTwenty*
 
 </details>
 
-### *Run Shiba Run*
+### [*Run Shiba Run* (Free Steam game)](https://store.steampowered.com/app/4038250/Run_Shiba_Run/)
 created outline shader for additional visual style
 
 <details>
@@ -93,7 +93,7 @@ created outline shader for additional visual style
 - on web, "fake alpha" by Scene Color + specular in *Fragment Color* slot either gives "completely opaque" or "completely transparent" result
 - on web, simulating normals via *Fragment Color* manipulation dealing with opacity doesn't seem to work
 
-- shadows cast by transparent materials doesn't seem to work on web for some reason, and perceived depth may be flattened because of that
+- on web, shadows that are cast from transparent materials doesn't seem to work, and perceived depth may be flattened because of that
 
 ### Other
 
