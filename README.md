@@ -9,6 +9,8 @@ shaders test on web
 
 repo for web build output: [ShadersTest-webbuild](https://github.com/nebobyeoli/ShadersTest-webbuild/)
 
+(NOTE: the web build output's `Outline` scenes does not display on web - it's a WebGL issue, and will work when viewed from Unity Editor & Windows build)
+
 <details>
 <summary><i>Preview image</i></summary>
 
