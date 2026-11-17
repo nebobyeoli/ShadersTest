@@ -1,0 +1,32 @@
+﻿{
+  "_comment1": "this is a user setting file for https://marketplace.visualstudio.com/items?itemName=TimGJones.HLSLToolsforVisualStudio",
+  "_comment2": "docs: https://github.com/tgjones/hlsltools#custom-preprocessor-definitions-and-additional-include-directories",
+
+  "_comment00": "ex. usage in hlsl: #include \"Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl\",",
+  "_comment01": "    hotkey to open include file: Ctrl + G",
+
+  "_comment02": "NOTE: this extension does NOT work for .shader files, this only works for .hlsl files",
+
+  "hlsl.preprocessorDefinitions": {
+    "SHADER_API_D3D11": 1,
+    "_comment1": "prevent false errors",
+    "_comment2": "If you are developing specifically for another platform, you can replace or pair it with SHADER_API_VULKAN: 1 / SHADER_API_METAL: 1 / SHADER_API_GLES3: 1"
+  },
+
+
+  "_comment3": "prefix is ../../ bc current dir of this file is (ProjectDir)/Assets/Shaders/, and Library dir is (ProjectDir)/Library",
+  "_comment4": "change this prefix if this file is moved somewhere else",
+
+  "_comment5": "the '.' entry is needed in order to make 'open source file' work even if this shadertoolsconfig.json is not in the EXACT dir of a .hlsl file",
+  "hlsl.additionalIncludeDirectories": [
+    ".",
+    "../../Library/PackageCache/com.unity.render-pipelines.universal@1e1527b3a17b",
+    "../../Library/PackageCache/com.unity.render-pipelines.core@317e801bb3aa"
+  ],
+
+  "_comment6": "match the dirs to hlsl.additionalIncludeDirectories, note that the exact @ id may differ per project",
+  "hlsl.virtualDirectoryMappings": {
+    "Packages/com.unity.render-pipelines.universal": "../../Library/PackageCache/com.unity.render-pipelines.universal@1e1527b3a17b",
+    "Packages/com.unity.render-pipelines.core": "../../Library/PackageCache/com.unity.render-pipelines.core@317e801bb3aa"
+  }
+}
