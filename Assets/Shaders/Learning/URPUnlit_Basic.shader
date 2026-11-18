@@ -24,6 +24,10 @@ Shader "Learning/URPUnlit_Basic"
         {
             HLSLPROGRAM // using HLSL (High Level Shader Language)
 
+            /**
+             * code inside HLSLPROGRAM ENDHLSL are actual hlsl code!!
+             */
+
             #pragma vertex vert     // use function "vert" for vertex shader
             #pragma fragment frag   // use function "frag" for fragment shader
             
@@ -79,7 +83,7 @@ Shader "Learning/URPUnlit_Basic"
             // returns = OUTPUT of vertex shader, INPUT of fragment shader
             Varyings vert(Attributes IN/* vertex data Attributes */)
             {
-                Varyings OUT; // = (Varyings)0; // set default values
+                Varyings OUT; // = (Varyings)0; // set default values // or in URP/HDRP: ZERO_INITIALIZE(Varyings, OUT);
 
                 OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz); // TransformObjectTo H omogeneous Clip Space
                 OUT.uv = TRANSFORM_TEX(IN.uv, _BaseMap); // map texture to uvs
