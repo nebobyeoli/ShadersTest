@@ -27,6 +27,7 @@
   "_comment6": "match the dirs to hlsl.additionalIncludeDirectories, note that the exact @ id may differ per project",
   "hlsl.virtualDirectoryMappings": {
     "Packages/com.unity.render-pipelines.universal": "../../Library/PackageCache/com.unity.render-pipelines.universal@1e1527b3a17b",
-    "Packages/com.unity.render-pipelines.core": "../../Library/PackageCache/com.unity.render-pipelines.core@317e801bb3aa"
+    "Packages/com.unity.render-pipelines.core": "../../Library/PackageCache/com.unity.render-pipelines.core@317e801bb3aa",
+    "Assets": "../"
   }
 }
