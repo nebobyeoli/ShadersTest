@@ -1,8 +1,7 @@
 ﻿#ifndef CUSTOM_LIGHTING_INCLUDED
 #define CUSTOM_LIGHTING_INCLUDED
 
-#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Shadows.hlsl"     // for TransformWorldToShadowCoord()
-#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"    // for type Light
+#include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Lighting.hlsl"    // for type Light & TransformWorldToShadowCoord()
 
 void MainLight_float(float3 WorldPos, out float3 Direction, out float3 Color, out float DistanceAtten, out float ShadowAtten);
 void MainLight_half(float3 WorldPos, out half3 Direction, out half3 Color, out half DistanceAtten, out half ShadowAtten);
