@@ -1,4 +1,5 @@
-// cf. learning: https://www.youtube.com/watch?v=eMWrMRdP5jY
+// cf. YouTube - Daniel Ilett - Your First Shader | Unity Shader Code Basics 01
+//     https://www.youtube.com/watch?v=eMWrMRdP5jY&list=PLsaDw3p1XpJivdTbFKP7cBV-WhhJ6qZ20
 Shader "Learning/URPUnlit_Basic"
 {
     // user settable properties, hidable with [HideInInspector] prefix
@@ -97,8 +98,8 @@ Shader "Learning/URPUnlit_Basic"
             {
                 // return _BaseColor;
 
-                half4 color = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv) * _BaseColor;
-                return color;
+                half4 baseMapColor = SAMPLE_TEXTURE2D(_BaseMap, sampler_BaseMap, IN.uv);
+                return baseMapColor * _BaseColor;
             }
             ENDHLSL
         }
