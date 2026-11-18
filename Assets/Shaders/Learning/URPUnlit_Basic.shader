@@ -1,4 +1,5 @@
-Shader "Learning/URPUnlitBasic"
+// cf. learning: https://www.youtube.com/watch?v=eMWrMRdP5jY
+Shader "Learning/URPUnlit_Basic"
 {
     // user settable properties, hidable with [HideInInspector] prefix
     Properties
@@ -40,11 +41,12 @@ Shader "Learning/URPUnlitBasic"
             /**
              * CBUFFER_START:
              * for compability with the SRP(Scriptable Render Pipeline = URP/HDRP/CustomSRP) batcher
-             * (increase CPU performance for batch handling of same shader variants)
+             * (increase CPU to GPU transfer performance via rendering same shader variants on a single draw call)
              * 
              * "Never put TEXTURE2D/SAMPLER declarations inside CBUFFER_START,
              *  bc only numerical values (float/half/int/vector/matrix) belong in a constant buffer"
              */
+            // cf. draw calls visualized: Window > Analysis > Frame Debugger
             CBUFFER_START(UnityPerMaterial)
                 half4 _BaseColor;       // redeclare here to be usable in HLSL code?
                 float4 _BaseMap_ST;     // ST = Scale & Translation (= tiling & offset)
@@ -52,6 +54,8 @@ Shader "Learning/URPUnlitBasic"
             
             TEXTURE2D(_BaseMap);
             SAMPLER(sampler_BaseMap);
+            // SAMPLER: combines Wrap Mode(how to handle UVs outside of 0~1 range)
+            //          & Filter Mode(sampling small region of texture over large surface) settings of a texture
 
 
             // struct Attributes (or "appdata/VertexInput") = INPUT of vertex shader
@@ -77,7 +81,7 @@ Shader "Learning/URPUnlitBasic"
                 Varyings OUT; // = (Varyings)0; // set default values
 
                 OUT.positionHCS = TransformObjectToHClip(IN.positionOS.xyz); // TransformObjectTo H omogeneous Clip Space
-                OUT.uv = TRANSFORM_TEX(IN.uv, _BaseMap);
+                OUT.uv = TRANSFORM_TEX(IN.uv, _BaseMap); // map texture to uvs
                 return OUT;
             }
 
